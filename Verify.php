@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Composer\Plugin\AutomaticUpdates\Verify;
+namespace Drupal\Composer\Plugin\AutomaticUpdates;
 
 use Composer\Composer;
 use Composer\Downloader\TransportException;
@@ -72,7 +72,7 @@ class Verify implements PluginInterface, EventSubscriberInterface {
     $verifier = new Verifier($key);
     // @TODO: hard-code the version and package info until
     // https://github.com/composer/composer/pull/8810 lands.
-    $url = sprintf('http://updates.drupal.org/release-hashes/%s/%s/contents-sha256sums-packaged.csig', 'drupal', '8.8.3');
+    $url = sprintf('https://updates.drupal.org/release-hashes/%s/%s/contents-sha256sums-packaged.csig', 'drupal', '8.8.3');
     try {
       $csig = $downloader->get($url)->getBody();
     } catch (TransportException $e) {
