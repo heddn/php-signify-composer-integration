@@ -36,5 +36,5 @@ jobs:
         key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
         restore-keys: ${{ runner.os }}-composer-
 
-     - name: Run test suite
-       run: vendor/bin/phpunit
+    - name: Run test suite
+      run: vendor/bin/phpunit
