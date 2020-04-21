@@ -42,20 +42,20 @@ jobs:
       - name: Clone/setup composer v2
         run: 'cd ~ && git clone https://github.com/composer/composer.git'
 
-      - name: Build composer v2 using PHP 7.3
-        run: "cd ~/composer && composer config platform.php 7.3 && composer install ${{ env.COMPOSER_FLAGS }} && ls -alR"
+      - name: Build composer v2
+        run: "cd ~/composer && composer compile"
 
       - name: Validate composer.json and composer.lock
-        run: pwd && ls -alR ~/composer/vendor/bin && php ~/composer/vendor/bin/composer validate
+        run: ~/composer/bin/composer validate
 
       - name: Install dependencies
-        run: "php ~/composer/vendor/bin/composer install ${{ env.COMPOSER_FLAGS }}"
+        run: "~/composer/bin/composer install ${{ env.COMPOSER_FLAGS }}"
 
       - name: PHP Copy Paste Detector
         uses: StephaneBour/actions-php-cpd@1.0
         with:
           dir: './src'
-          args: '--exclude composer vendor'
+          args: '--exclude vendor'
 
       - name: PHP Code Style (phpcs)
         uses: chindit/actions-phpcs@master
