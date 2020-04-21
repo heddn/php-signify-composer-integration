@@ -49,6 +49,15 @@ jobs:
       - name: Install dependencies
         run: "composer/vendor/bin/composer install ${{ env.COMPOSER_FLAGS }}"
 
+      - name: PHP Copy Paste Detector
+        uses: StephaneBour/actions-php-cpd@1.0
+        with:
+          dir: './src'
+          args: '--exclude composer vendor'
+
+      - name: PHP Code Style (phpcs)
+          uses: chindit/actions-phpcs@master
+
       - name: Cache dependencies
         uses: actions/cache@v1
         with:
