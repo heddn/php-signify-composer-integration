@@ -27,11 +27,13 @@
     "require-dev": {
         "composer/composer": "^2@dev",
         "phpspec/prophecy-phpunit": "^1.0",
-        "phpunit/phpunit": "^8.0"
+        "phpunit/phpunit": "^8.0",
+        "squizlabs/php_codesniffer": "^3.0"
     },
     "license": "GPL-2.0-or-later",
     "config": {
         "sort-packages": true
     },
+    "prefer-stable":  true,
     "minimum-stability": "dev"
 }

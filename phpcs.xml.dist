@@ -5,5 +5,4 @@
   <exclude-pattern>vendor/*</exclude-pattern>
   <exclude-pattern>composer/*</exclude-pattern>
   <rule ref="PSR12"/>
-  <rule ref="Generic"/>
 </ruleset>
