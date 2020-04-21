@@ -44,7 +44,7 @@ jobs:
         run: "cd ~/composer && composer install ${{ env.COMPOSER_FLAGS }}"
 
       - name: Validate composer.json and composer.lock
-        run: php ~/composer/vendor/bin/composer validate
+        run: pwd && ls -al ~/composer && php ~/composer/vendor/bin/composer validate
 
       - name: Install dependencies
         run: "php ~/composer/vendor/bin/composer install ${{ env.COMPOSER_FLAGS }}"
