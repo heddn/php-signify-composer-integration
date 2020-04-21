@@ -43,7 +43,7 @@ jobs:
         run: 'cd ~ && git clone https://github.com/composer/composer.git'
 
       - name: Build composer v2
-        run: cd ~/composer && composer compile
+        run: cd ~/composer && php -dphar.readonly=0 ./bin/compile
 
       - name: Validate composer.json and composer.lock
         run: ~/composer/bin/composer validate
