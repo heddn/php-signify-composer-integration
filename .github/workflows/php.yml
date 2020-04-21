@@ -38,16 +38,16 @@ jobs:
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"
 
       - name: Clone/setup composer v2
-        run: 'git clone https://github.com/composer/composer.git'
+        run: 'cd ~ && git clone https://github.com/composer/composer.git'
 
       - name: Build composer v2
         run: "cd composer && composer install ${{ env.COMPOSER_FLAGS }}"
 
       - name: Validate composer.json and composer.lock
-        run: composer/vendor/bin/composer validate
+        run: ~/composer/vendor/bin/composer validate
 
       - name: Install dependencies
-        run: "composer/vendor/bin/composer install ${{ env.COMPOSER_FLAGS }}"
+        run: "~/composer/vendor/bin/composer install ${{ env.COMPOSER_FLAGS }}"
 
       - name: PHP Copy Paste Detector
         uses: StephaneBour/actions-php-cpd@1.0
