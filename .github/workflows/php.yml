@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [ master ]
 
+env:
+  COMPOSER_FLAGS: "--ansi --no-interaction --no-progress --no-suggest --prefer-dist --optimize-autoloader"
+
 jobs:
   build:
 
@@ -30,15 +33,21 @@ jobs:
       - name: Setup problem matchers for PHPUnit
         run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
-      - name: Validate composer.json and composer.lock
-        run: composer validate
-
-      - name: Install dependencies
-        run: composer install --prefer-dist --no-progress --no-suggest
-
       - name: Get composer cache directory
         id: composer-cache
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Clone/setup composer v2
+        run: 'git clone git@github.com:composer/composer.git'
+
+      - name: Build composer v2
+        run: "cd composer && composer install ${{ env.COMPOSER_FLAGS }}"
+
+      - name: Validate composer.json and composer.lock
+        run: composer/vendor/bin/composer validate
+
+      - name: Install dependencies
+        run: "composer/vendor/bin/composer install ${{ env.COMPOSER_FLAGS }}"
 
       - name: Cache dependencies
         uses: actions/cache@v1
