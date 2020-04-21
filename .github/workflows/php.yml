@@ -38,7 +38,7 @@ jobs:
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"
 
       - name: Clone/setup composer v2
-        run: 'git clone git@github.com:composer/composer.git'
+        run: 'git clone https://github.com/composer/composer.git'
 
       - name: Build composer v2
         run: "cd composer && composer install ${{ env.COMPOSER_FLAGS }}"
