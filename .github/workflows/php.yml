@@ -56,7 +56,7 @@ jobs:
           args: '--exclude composer vendor'
 
       - name: PHP Code Style (phpcs)
-          uses: chindit/actions-phpcs@master
+        uses: chindit/actions-phpcs@master
 
       - name: Cache dependencies
         uses: actions/cache@v1
