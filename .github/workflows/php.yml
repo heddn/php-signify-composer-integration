@@ -43,19 +43,19 @@ jobs:
         run: 'cd ~ && git clone https://github.com/composer/composer.git'
 
       - name: Build composer v2
-        run: "cd ~/composer && composer compile"
+        run: cd ~/composer && composer compile
 
       - name: Validate composer.json and composer.lock
         run: ~/composer/bin/composer validate
 
       - name: Install dependencies
-        run: "~/composer/bin/composer install ${{ env.COMPOSER_FLAGS }}"
+        run: '~/composer/bin/composer install ${{ env.COMPOSER_FLAGS }}'
 
       - name: PHP Copy Paste Detector
         uses: StephaneBour/actions-php-cpd@1.0
         with:
-          dir: './src'
-          args: '--exclude vendor'
+          dir: ./src
+          args: --exclude vendor
 
       - name: PHP Code Style (phpcs)
         uses: chindit/actions-phpcs@master
