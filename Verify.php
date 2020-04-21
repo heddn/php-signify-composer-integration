@@ -34,29 +34,29 @@ class Verify implements PluginInterface, EventSubscriberInterface
    *
    * @var IOInterface
    */
-    private $io;
+    private $inputOutput;
 
   /**
    * {@inheritdoc}
    */
-    public function deactivate(Composer $composer, IOInterface $io): void
+    public function deactivate(Composer $composer, IOInterface $inputOutput): void
     {
     }
 
   /**
    * {@inheritdoc}
    */
-    public function uninstall(Composer $composer, IOInterface $io): void
+    public function uninstall(Composer $composer, IOInterface $inputOutput): void
     {
     }
 
   /**
    * {@inheritdoc}
    */
-    public function activate(Composer $composer, IOInterface $io): void
+    public function activate(Composer $composer, IOInterface $inputOutput): void
     {
         $this->composer = $composer;
-        $this->io = $io;
+        $this->inputOutput = $inputOutput;
     }
 
   /**
@@ -77,7 +77,7 @@ class Verify implements PluginInterface, EventSubscriberInterface
    */
     public function onPostFileDownload(PostFileDownloadEvent $event): void
     {
-        $downloader = Factory::createHttpDownloader($this->io, $this->composer->getConfig());
+        $downloader = Factory::createHttpDownloader($this->inputOutput, $this->composer->getConfig());
         $key = file_get_contents('artifacts/keys/root.pub');
         $verifier = new Verifier($key);
       // @TODO: hard-code the version and package info until

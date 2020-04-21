@@ -22,10 +22,10 @@ class VerifyTest extends TestCase {
    */
   public function testOnPostFileDownload() {
     $plugin = new Verify();
-    $io = $this->prophesize(IOInterface::class);
+    $inputOutput = $this->prophesize(IOInterface::class);
     $composer = $this->prophesize(Composer::class);
     $composer->getConfig()->willReturn(new Config());
-    $plugin->activate($composer->reveal(), $io->reveal());
+    $plugin->activate($composer->reveal(), $inputOutput->reveal());
     $event = new PostFileDownloadEvent(PluginEvents::POST_FILE_DOWNLOAD, 'drupal.zip', 'checksum', 'https://drupal.org', new Package('drupal', '8.8.3', '8.8.3'));
     $this->expectException(\RuntimeException::class);
     $this->expectExceptionMessage('The downloaded files did not match what was expected.');

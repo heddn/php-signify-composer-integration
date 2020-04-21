@@ -35,6 +35,12 @@ jobs:
       - name: Setup problem matchers for PHPUnit
         run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
+      - name: Setup problem matchers for PHP Mess Detetor
+        run: echo "::add-matcher::${{ runner.tool_cache }}/phpmd.json"
+
+      - name: Setup problem matchers for PHPCS
+        run: echo "::add-matcher::${{ runner.tool_cache }}/phpcs.json"
+
       - name: Get composer cache directory
         id: composer-cache
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"
@@ -51,14 +57,11 @@ jobs:
       - name: Install dependencies
         run: 'php ~/composer/composer.phar install ${{ env.COMPOSER_FLAGS }}'
 
-      - name: PHP Copy Paste Detector
-        uses: StephaneBour/actions-php-cpd@1.0
-        with:
-          dir: ./src
-          args: --exclude vendor
+      - name: Run PHP Mess Detector
+        run: vendor/bin/phpmd --exclude vendor . json codesize,naming,unusedcode >phpmd.json
 
-      - name: PHP Code Style (phpcs)
-        uses: chindit/actions-phpcs@master
+      - name: Run PHPCS
+        run: vendor/bin/phpcs --report=json >phpcs.json
 
       - name: Cache dependencies
         uses: actions/cache@v1
