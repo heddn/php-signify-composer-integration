@@ -10,7 +10,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Drupal\\Composer\\Plugin\\AutomaticUpdates\\Tests\\": "."
+            "Drupal\\Composer\\Plugin\\AutomaticUpdates\\Tests\\": "tests"
         }
     },
     "scripts": {

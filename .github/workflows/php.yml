@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 env:
-  COMPOSER_FLAGS: "--ansi --no-interaction --no-progress --no-suggest --prefer-dist --optimize-autoloader"
+  COMPOSER_FLAGS: "--ansi --no-interaction --no-progress --prefer-dist --optimize-autoloader"
 
 jobs:
   build:
@@ -65,4 +65,4 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-
 
       - name: Run test suite
-        run: vendor/bin/phpunit
+        run: php ~/composer/composer.phar test
