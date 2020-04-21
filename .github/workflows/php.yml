@@ -42,8 +42,8 @@ jobs:
       - name: Clone/setup composer v2
         run: 'cd ~ && git clone https://github.com/composer/composer.git'
 
-      - name: Build composer v2
-        run: "cd ~/composer && composer install ${{ env.COMPOSER_FLAGS }} && ls -alR"
+      - name: Build composer v2 using PHP 7.3
+        run: "cd ~/composer && composer config platform.php 7.3 && composer install ${{ env.COMPOSER_FLAGS }} && ls -alR"
 
       - name: Validate composer.json and composer.lock
         run: pwd && ls -alR ~/composer/vendor/bin && php ~/composer/vendor/bin/composer validate
